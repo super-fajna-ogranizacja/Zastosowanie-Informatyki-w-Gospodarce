@@ -1,56 +1,36 @@
 import json
-import os
 import re
+import os
 
 try:
-    import requests
+    from yaml import dump, CDumper as Dumper
 except ImportError:
-    raise ImportError("Please install the required packages: requests")
+    raise ImportError("Please install the required packages: requests, pyaml")
+
+from app import App
+import connection
 
 
 COLUMNS = 105
-owner, repo_name = os.environ["OWNER_AND_REPO"].split("/")
-
-url = "https://api.github.com/graphql"
-query = """
-query getDiscussions {
-    repository(name: "$repo_name", owner: "$owner") {
-        discussions(first: 100) {
-            nodes {
-                title
-                body
-                author {
-                    login
-                }
-            }
-            totalCount
-        }
-    }
-}
-"""
-
-variables = {
-    "repo_name": repo_name,
-    "owner": owner,
-}
 
 
-def apply_variables(query, variables):
-    """Replaces the variables names in the query with their values
+def print_apps(apps):
+    """Prints the details of all apps
 
     Parameters
     ----------
-    query : str
-        The query to be sent to the server
-    variables : dict
-        The variables to be replaced in the query
+    apps : list
+        List of App objects
 
     """
 
-    for name, value in variables.items():
-        query = query.replace("$"+name, str(value))
+    print("\nPrinting parsed discussions:")
 
-    return query
+    for app in apps:
+        print('-' * COLUMNS)
+        app.print_app()
+
+    print('*' * COLUMNS)
 
 
 def parse_discussions(response):
@@ -61,6 +41,10 @@ def parse_discussions(response):
     response : requests.Response object
         Contains the server's response to the HTTP request.
 
+    Returns
+    -------
+    list
+        List of App objects
     """
 
     # Regexes for parsing the entries in discussion body
@@ -76,57 +60,67 @@ def parse_discussions(response):
     body_regex = re.compile(description_re + url_re +
                             types_re + platforms_re + comments_re + r"$")
 
-    print("Printing fetched and parsed discussions:")
+    apps = []
     for discussion in json.loads(response.text)["data"]["repository"]["discussions"]["nodes"]:
         app_name = discussion["title"]
         matched = body_regex.match(discussion["body"])
-        printAppDetails(app_name, matched)
+        try:
+            description = matched.group(1)
+            urls = matched.group(2)
+            types = matched.group(3)
+            platforms = matched.group(4)
+            comments = matched.group(5)
+        except (AttributeError):
+            print(f'Error during body parsing for {app_name}')
+            continue
 
-    print('*' * COLUMNS)
+        app = App(app_name, description, urls, types, platforms, comments)
+        apps.append(app)
+        print(f'Parsed discussion for {app_name} successfully')
+
+    return apps
 
 
-def printAppDetails(app_name, matched):
-    """Prints the details of an app
+def generate_yaml(apps, filename):
+    ''' Generates a YAML file from the apps list
 
     Parameters
     ----------
-    app_name : str
-        Name of the app
-    matched : re.Match object
-        Contains the matched groups of the regex
-    """
+    apps : list
+        List of App objects
+    filename : str
+        Name of the file to which YAML will be written
 
-    print('-' * COLUMNS)
+    Returns
+    -------
+    str
+        YAML string
+    '''
 
-    try:
-        description = matched.group(1)
-        urls = matched.group(2)
-        types = matched.group(3)
-        platforms = matched.group(4)
-        comments = matched.group(5)
-    except (AttributeError):
-        print(f'Error during body parsing for {app_name}')
-        return
+    apps_to_yaml = {}
+    for app in apps:
+        apps_to_yaml[app.name] = {
+            "description": app.description,
+            "urls": app.urls,
+            "types": app.types,
+            "platforms": app.platforms,
+            "comments": app.comments
+        }
 
-    print(f'App_name: {app_name}',
-          f'Description: {description}',
-          f'Urls: {urls}',
-          f'Types: {types}',
-          f'Platforms: {platforms}',
-          f'Comments: {comments}',
-          sep='\n'
-          )
+    if filename:
+        with open(filename, "w") as f:
+            dump(data=apps_to_yaml, default_flow_style=False,
+                 stream=f, sort_keys=False, Dumper=Dumper, indent=4)
+
+    return dump(data=apps_to_yaml, default_flow_style=False,
+                sort_keys=False, Dumper=Dumper, indent=4)
 
 
+owner, repo_name = os.environ["OWNER_AND_REPO"].split("/")
 api_token = os.environ["API_TOKEN"]
-headers = {
-    "Authorization": "Bearer " + api_token,
-}
+response = connection.get_discussions(owner, repo_name, api_token)
 
-response = requests.post(
-    url=url,
-    json={"query": apply_variables(query, variables)},
-    headers=headers,
-)
-
-parse_discussions(response)
+apps = parse_discussions(response)
+print_apps(apps)
+print("\nGenerated YAML:")
+print(generate_yaml(apps, filename=None))
