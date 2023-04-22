@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./styles/styles.css"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>McFly</title>
+    <title>{{&name}}</title>
 </head>
 <body>
 <main>
@@ -26,35 +26,37 @@
     </header>
 
 
-    <h4>category</h4>
+    <h4>{{&category}}</h4>
 
-    <h1>McFly</h1>
+    <h1>{{&name}}</h1>
 
     <br/>
 
     <h2>Description</h2>
 
     <p>
-        an upgraded ctrl-r where history results make sense for what
-        you're working on right now
+        {{&description}}
     </p>
 
     <h3>Types</h3>
     <div class="container">
-        <span class="chip"> CMD </span>
+        {{#types}}
+            <span class="chip">{{&item}}</span>
+        {{/types}}
     </div>
 
     <h3>Platforms</h3>
     <div class="container">
-        <span class="chip"> Linux </span>
-        <span class="chip"> Mac </span>
+        {{#platforms}}
+            <span class="chip">{{&item}}</span>
+        {{/platforms}}
     </div>
 
     <h2>Comments</h2>
 
-    <ul>
-        <li>more user-friendly backward search in shell</li>
-    </ul>
+    <p>
+        {{&comments}}
+    </p>
 </main>
 
 <!--To be continued!-->
