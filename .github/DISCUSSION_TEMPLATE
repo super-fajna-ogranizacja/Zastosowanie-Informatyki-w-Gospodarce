@@ -1,0 +1,64 @@
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Few words about the project and what it does
+    validations:
+      required: true
+  - type: textarea
+    id: urls
+    attributes:
+      label: URLs
+      description: URLs related to the project
+    validations:
+      required: true
+  - type: checkboxes
+    id: types
+    attributes:
+      label: Types
+      description: What type of project it is
+      options:
+        - label: CLI
+        - label: TUI
+        - label: GUI
+        - label: webapp
+        - label: library
+        - label: framework
+    validations:
+      required: true
+  - type: checkboxes
+    id: platforms
+    attributes:
+      label: Platforms
+      description: Platforms on which this project runs
+      options:
+        - label: Linux
+        - label: Windows
+        - label: MacOS
+        - label: iOS
+        - label: Android
+        - label: Web
+    validations:
+      required: true
+  - type: dropdown
+    id: categories
+    attributes:
+      label: Categories
+      description: What are you doing with this project
+      options:
+        - Need to check
+        - Want to or may use
+        - Currently using
+        - Using now and then
+        - Replaced
+        - Interesting, but not using
+    validations:
+      required: true
+  - type: textarea
+    id: comments
+    attributes:
+      label: "\n---"
+      placeholder: Your own comments about this project
+    validations:
+      required: false
