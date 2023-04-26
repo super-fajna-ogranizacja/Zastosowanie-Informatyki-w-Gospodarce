@@ -17,7 +17,7 @@ body:
     id: types
     attributes:
       label: Types
-      description: Types of project
+      description: What type of project it is
       options:
         - label: CLI
         - label: TUI
