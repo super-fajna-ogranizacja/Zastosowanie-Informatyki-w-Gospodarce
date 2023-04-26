@@ -3,7 +3,7 @@ body:
     id: description
     attributes:
       label: Description
-      description: Description of a project
+      description: Few words about the project and what it does
     validations:
       required: true
   - type: textarea
