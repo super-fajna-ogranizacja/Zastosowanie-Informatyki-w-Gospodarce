@@ -10,7 +10,7 @@ body:
     id: urls
     attributes:
       label: URLs
-      description: URLs related to project
+      description: URLs related to the project
     validations:
       required: true
   - type: checkboxes
