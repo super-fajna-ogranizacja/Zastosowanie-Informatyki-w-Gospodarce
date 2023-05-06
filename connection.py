@@ -1,7 +1,44 @@
-import requests
+import os
+
+try:
+    import requests
+except ImportError:
+    raise ImportError("Please install the required package: requests")
 
 
 GRAPHQL_URL = "https://api.github.com/graphql"
+OWNER, REPO_NAME = os.environ["OWNER_AND_REPO"].split("/")
+API_TOKEN = os.environ["API_TOKEN"]
+
+DISCUSSIONS_QUERY = """
+query getDiscussions {
+    repository(name: "$repo_name", owner: "$owner") {
+        discussions(first: 100, categoryId: "$categoryId") {
+            nodes {
+                title
+                body
+                author {
+                    login
+                }
+            }
+            totalCount
+        }
+    }
+}
+"""
+
+CATEGORIES_QUERY = """
+query getDiscussionCategories {
+    repository(name: "$repo_name", owner: "$owner") {
+        discussionCategories(first: 100) {
+            nodes {
+                id
+                name
+            }
+        }
+    }
+}
+"""
 
 
 def apply_variables(query, variables):
@@ -14,16 +51,31 @@ def apply_variables(query, variables):
     variables : dict
         The variables to be replaced in the query
 
+    Returns
+    -------
+    str
+        The query with the variables replaced
     """
 
+    # Add the repo name and owner to the variables as they are used in every query
+    variables["repo_name"] = REPO_NAME
+    variables["owner"] = OWNER
+
     for name, value in variables.items():
-        query = query.replace("$"+name, str(value))
+        query = query.replace("$" + name, str(value))
 
     return query
 
 
-def get_discussions(owner, repo_name, api_token):
-    """Gets the discussions from the GitHub repository
+def send_request(query, variables=None):
+    """Sends given query with given parameters
+
+    Parameters
+    ----------
+    query : str
+        The query to be sent to the server
+    variables : dict, optional
+        The variables to be replaced in the query
 
     Returns
     -------
@@ -31,28 +83,11 @@ def get_discussions(owner, repo_name, api_token):
         Contains the server's response to the HTTP request.
     """
 
-    query = """
-    query getDiscussions {
-        repository(name: "$repo_name", owner: "$owner") {
-            discussions(first: 100) {
-                nodes {
-                    title
-                    body
-                    author {
-                        login
-                    }
-                }
-                totalCount
-            }
-        }
-    }
-    """
-    variables = {
-        "repo_name": repo_name,
-        "owner": owner,
-    }
+    if variables is None:
+        variables = {}
+
     headers = {
-        "Authorization": "Bearer " + api_token,
+        "Authorization": "Bearer " + API_TOKEN,
     }
 
     response = requests.post(
