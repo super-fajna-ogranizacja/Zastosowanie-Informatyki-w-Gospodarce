@@ -1,3 +1,4 @@
+---
 name: Get discussions
 
 on:
@@ -22,7 +23,8 @@ jobs:
           pip install requests pyaml
 
       - name: Run Python script
-        run: python main.py
+        run: python fetch_discussions.py
         env:
           OWNER_AND_REPO: ${{ github.repository }}
           API_TOKEN: ${{ secrets.API_TOKEN }}
+          DISCUSSIONS_CATEGORY: "Projects"
