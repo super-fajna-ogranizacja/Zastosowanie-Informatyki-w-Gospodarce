@@ -1,0 +1,44 @@
+:root {
+    --primary-color-main: #3f51b5;
+    --border-radius: 12px;
+    --padding-small: 4px;
+    --padding-medium: 8px;
+    --padding-large: 12px;
+}
+
+.chip {
+    border-radius: var(--border-radius);
+    background-color: var(--primary-color-main);
+    padding: var(--padding-small) var(--padding-large);
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: var(--padding-medium);
+}
+
+.navigator {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+#virtualScroll {
+    height: 300px;
+    width: 30%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    z-index: 3;
+
+    visibility: hidden;
+
+    position: absolute;
+    overflow: auto;
+
+    background-color: white;
+    color: black;
+}
+
+#searchBox{
+    width: 100%;
+}
