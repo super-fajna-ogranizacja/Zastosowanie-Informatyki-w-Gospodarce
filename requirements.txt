@@ -1,0 +1,5 @@
+aiohttp
+chevron
+py-memoize
+pyaml
+requests
