@@ -1,0 +1,48 @@
+---
+name: Render and deploy GitHub Pages
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  render_github_pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@main
+        with:
+          python-version: "3.10"
+
+      - name: Checkout main branch
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.API_TOKEN }}
+          path: main
+          ref:  main
+
+      - name: Install dependencies
+        run: |
+          cd main
+          pip install -r requirements.txt
+
+      - name: Build
+        run: |
+          cd main
+          cp ../apps.yml .
+          python yaml2html.py
+
+          mkdir ../build
+          cp html/* ../build/
+          cp -r styles ../build/styles
+        env:
+          OWNER_AND_REPO: ${{ github.repository }}
+          API_TOKEN: ${{ secrets.API_TOKEN }}
+
+      - name: Deploy GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build
+          token: ${{ secrets.API_TOKEN }}
