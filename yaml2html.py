@@ -142,7 +142,7 @@ async def main():
         output_dir.mkdir()
 
     # read the mustache template
-    with open("index.html.mustache") as fd:
+    with open("project.html.mustache") as fd:
         template = fd.read()
 
     # render each app using the template
