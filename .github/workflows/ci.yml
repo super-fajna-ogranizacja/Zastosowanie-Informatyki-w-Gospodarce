@@ -20,7 +20,7 @@ jobs:
 
       - name: Install dependencies
         run:
-          pip install requests pyaml
+          pip install -r requirements.txt
 
       - name: Run Python script
         run: python fetch_discussions.py
