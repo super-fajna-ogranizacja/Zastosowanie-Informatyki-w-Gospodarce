@@ -43,8 +43,11 @@ jobs:
       - name: Push changes
         run: |
           cd discussion-history
-          git config user.name ${{ github.repository_owner }}
-          git config user.email ${{ github.repository_owner }}@users.noreply.github.com
-          git add apps.yml
-          git commit -m "Update apps.yml"
-          git push origin HEAD:discussion-history
+          if [ -n "$(git diff apps.yml)" ]; then
+              git config user.name ${{ github.repository_owner }}
+              git config user.email ${{ github.repository_owner }}@users.noreply.github.com
+              git add apps.yml
+              git commit -m "Update apps.yml"
+              git push origin HEAD:discussion-history
+          else
+              echo "apps.yml did not change"
