@@ -51,3 +51,4 @@ jobs:
               git push origin HEAD:discussion-history
           else
               echo "apps.yml did not change"
+          fi
