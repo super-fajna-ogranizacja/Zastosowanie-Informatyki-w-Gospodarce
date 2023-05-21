@@ -5,13 +5,13 @@ from typing import Callable
 
 import aiohttp
 import chevron
-from memoize.wrapper import memoize
 import yaml
+from memoize.wrapper import memoize
 
 try:
-    from yaml import CLoader as Loader, CDumper as Dumper
+    from yaml import CLoader as Loader
 except ImportError:
-    from yaml import Loader, Dumper
+    from yaml import Loader  # type: ignore
 
 
 RenderFn = Callable[[str], str]
@@ -114,9 +114,9 @@ async def render_app(render: RenderFn, app: dict) -> dict:
         if isinstance(field_value, list):
             html_app[field] = []
             for item in field_value:
-                html_app[field].append({"item": await render(item)})
+                html_app[field].append({"item": await render(item)})  # type: ignore
         else:
-            html_app[field] = await render(field_value)
+            html_app[field] = await render(field_value)  # type: ignore
 
     return html_app
 
