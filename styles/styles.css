@@ -23,22 +23,19 @@
     grid-template-columns: repeat(3, 1fr);
 }
 
-#virtualScroll {
+#virtual-scroll {
     height: 300px;
     width: 30%;
     left: 50%;
     transform: translate(-50%, 0%);
     z-index: 3;
-
     visibility: hidden;
-
     position: absolute;
     overflow: auto;
-
     background-color: white;
     color: black;
 }
 
-#searchBox{
+#search-box{
     width: 100%;
 }
