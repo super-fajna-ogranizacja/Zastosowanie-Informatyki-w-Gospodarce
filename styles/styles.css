@@ -39,3 +39,10 @@
 #search-box{
     width: 100%;
 }
+
+.message-container{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
