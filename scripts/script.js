@@ -266,8 +266,8 @@ class SearchBox {
     }
 }
 
-const container = document.getElementById('virtualScroll');
-const searchBox = document.getElementById('searchBox');
+const container = document.getElementById('virtual-scroll');
+const searchBox = document.getElementById('search-box');
 
 window.addEventListener("load", () => {
     const rows = Array.from({length: 100}, (_, i) =>
