@@ -4,6 +4,10 @@
 
 python yaml2html.py
 
+cat ./html/czkawka.html
+
+cat ./html/just.html
+
 if ! cmp -s ./html/czkawka.html ./testfile1.html;then
     echo "test1 failed"
     exit 1
