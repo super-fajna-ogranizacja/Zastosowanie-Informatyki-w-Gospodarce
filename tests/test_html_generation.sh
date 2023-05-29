@@ -8,14 +8,14 @@ cat ./html/czkawka.html
 
 cat ./html/just.html
 
-if ! cmp -s ./html/czkawka.html ./testfile1.html;then
+if ! cmp ./html/czkawka.html ./testfile1.html;then
     echo "test1 failed"
     exit 1
 else
     echo "test1 passed"
 fi
 
-if cmp -s ./html/just.html ./testfile2.html;then
+if cmp ./html/just.html ./testfile2.html;then
     echo "test2 failed"
     exit 1
 else
