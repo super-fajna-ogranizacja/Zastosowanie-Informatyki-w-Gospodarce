@@ -22,3 +22,6 @@ jobs:
         run: |
           cd tests
           ./test_html_generation.sh
+        env:
+          OWNER_AND_REPO: ${{ github.repository }}
+          API_TOKEN: ${{ secrets.API_TOKEN }}
