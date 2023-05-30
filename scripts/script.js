@@ -1,5 +1,6 @@
 import SearchBox from './searchBox.js';
 import SearchPrompt from './searchPrompt.js';
+// eslint-disable-next-line import/no-unresolved
 import { projects } from './projects.js';
 import VirtualScroll from './virtualScroll.js';
 
