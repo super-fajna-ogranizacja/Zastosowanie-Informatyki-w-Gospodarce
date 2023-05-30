@@ -25,6 +25,8 @@ export default class VirtualRow {
       height: `${data.rowHeight}px`,
       overflow: 'hidden',
       marginBottom: 0,
+      backgroundColor: '#111',
+      padding: '6px 0',
     });
     rowContainer.title = data.title;
     rowInner.href = data.url;

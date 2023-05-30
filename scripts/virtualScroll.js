@@ -11,6 +11,7 @@ export default class VirtualScroll {
 
   defaultOptions = {
     rowHeight: 24,
+    rowMargin: 6,
     rowPadding: 4,
     visibleHeight: 300,
     height: 24 * 100,
@@ -52,12 +53,12 @@ export default class VirtualScroll {
   }
 
   getStartNode = (scrollTop) => {
-    const startNode = Math.floor(scrollTop / this.getOption('rowHeight')) - this.getOption('rowPadding');
+    const startNode = Math.floor(scrollTop / (this.getOption('rowHeight') + 2 * this.getOption('rowMargin'))) - this.getOption('rowPadding');
     return Math.max(0, startNode);
   };
 
   getVisibleNodeCount = (startNode, rowsLength) => {
-    const visibleNodesCount = Math.ceil(this.getOption('visibleHeight') / this.getOption('rowHeight')) + 2 * this.getOption('rowPadding');
+    const visibleNodesCount = Math.ceil(this.getOption('visibleHeight') / (this.getOption('rowHeight') + 2 * this.getOption('rowMargin'))) + 2 * this.getOption('rowPadding');
     return Math.min(rowsLength - startNode, visibleNodesCount);
   };
 
@@ -70,7 +71,7 @@ export default class VirtualScroll {
 
     const startNode = this.getStartNode(scrollTop);
     const visibleNodesCount = this.getVisibleNodeCount(startNode, rows.length);
-    const offsetY = startNode * this.getOption('rowHeight');
+    const offsetY = startNode * (this.getOption('rowHeight') + 2 * this.getOption('rowMargin'));
 
     if (!isFirst) {
       this.unmountItems();
@@ -151,7 +152,7 @@ export default class VirtualScroll {
     }
 
     this.cachedRows.clear();
-    this.setOption('height', length * this.getOption('rowHeight'));
+    this.setOption('height', length * (this.getOption('rowHeight') + 2 * this.getOption('rowMargin')));
     this.setOption('visibleHeight', container.clientHeight);
     container.style.visibility = 'visible';
 
@@ -171,6 +172,7 @@ export default class VirtualScroll {
     Object.assign(this.innerContainer.style, {
       height: `${this.getOption('height')}px`,
       overflow: 'hidden',
+      position: 'relative',
     });
 
     this.render(true);
