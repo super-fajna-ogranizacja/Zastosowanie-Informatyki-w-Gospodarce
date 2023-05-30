@@ -15,22 +15,23 @@ export default class SearchPrompt {
     this.name = text.toLowerCase();
   }
 
-  matches (project) {
-    const full_name = project.name.toLowerCase();
-    const searched_name = this.name;
+  matches(project) {
+    const fullName = project.name.toLowerCase();
+    const searchedName = this.name;
 
-    if (full_name.includes(searched_name))
+    if (fullName.includes(searchedName)) {
       return true;
+    }
 
-    if (full_name.length < searched_name.length)
+    if (fullName.length < searchedName.length) {
       return false;
+    }
 
-    let full_idx = 0;
-    let searched_idx = 0;
-    for (const full_letter of full_name) {
-      if (searched_name[searched_idx] == full_letter) {
-        searched_idx += 1;
-        if (searched_idx == searched_name.length) {
+    let searchedIdx = 0;
+    for (let fullIdx = 0; fullIdx < fullName.length; fullIdx += 1) {
+      if (searchedName[searchedIdx].localeCompare(fullName[fullIdx]) === 0) {
+        searchedIdx += 1;
+        if (searchedIdx === searchedName.length) {
           return true;
         }
       }
