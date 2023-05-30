@@ -1,41 +1,40 @@
 export default class VirtualRow {
-  container = null
+  container = null;
 
-  element = null
+  element = null;
 
-  constructor (container, data) {
-    this.container = container
-    this.element = this.render(data)
+  constructor(container, data) {
+    this.container = container;
+    this.element = this.render(data);
   }
 
   // eslint-disable-next-line no-dupe-class-members
-  get element () {
-    return this.element
+  get element() {
+    return this.element;
   }
 
   // eslint-disable-next-line no-dupe-class-members
-  set element (element) {
-    this.element = element
+  set element(element) {
+    this.element = element;
   }
 
   render = (data) => {
-    const rowContainer = document.createElement('p')
-    const rowInner = document.createElement('a')
+    const rowContainer = document.createElement('p');
+    const rowInner = document.createElement('a');
     Object.assign(rowContainer.style, {
       height: `${data.rowHeight}px`,
       overflow: 'hidden',
-      marginBottom: 0
-    })
-    rowContainer.title = data.title
-    rowInner.href = data.url
-    rowInner.target = '_blank'
-    rowInner.innerText = data.text
-    rowContainer.appendChild(rowInner)
-    this.element = rowContainer
-    return this.element
-  }
+      marginBottom: 0,
+    });
+    rowContainer.title = data.title;
+    rowInner.href = data.url;
+    rowInner.innerText = data.text;
+    rowContainer.appendChild(rowInner);
+    this.element = rowContainer;
+    return this.element;
+  };
 
   mountChild = () => {
-    this.container.appendChild(this.element)
-  }
+    this.container.appendChild(this.element);
+  };
 }

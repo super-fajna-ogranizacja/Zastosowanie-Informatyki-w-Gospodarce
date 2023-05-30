@@ -1,21 +1,21 @@
 export default class SearchPrompt {
-  title = null
+  title = null;
 
-  urls = null
+  urls = null;
 
-  type = null
+  type = null;
 
-  platform = null
+  platform = null;
 
-  desc = null
+  desc = null;
 
-  comment = null
+  comment = null;
 
-  constructor (text) {
-    this.title = text.toLowerCase()
+  constructor(text) {
+    this.title = text.toLowerCase();
   }
 
-  matches (project) {
-    return project.name.toLowerCase().includes(this.title)
+  matches(project) {
+    return project.name.toLowerCase().includes(this.title);
   }
 }
