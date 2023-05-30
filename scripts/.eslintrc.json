@@ -12,5 +12,6 @@
     },
     "rules": {
         "import/extensions": "off"
-    }
+    },
+    "ignorePatterns": [ "*.json"]
 }
