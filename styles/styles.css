@@ -12,6 +12,11 @@
     padding: var(--padding-small) var(--padding-large);
 }
 
+.page{
+    margin-top: 30vh;
+    position:relative;
+}
+
 .container {
     display: flex;
     flex-direction: row;
@@ -25,7 +30,7 @@
 
 #virtual-scroll {
     height: 300px;
-    width: 30%;
+    width: 100%;
     left: 50%;
     transform: translate(-50%, 0%);
     z-index: 3;

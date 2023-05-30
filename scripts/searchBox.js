@@ -1,28 +1,28 @@
 export default class SearchBox {
-  constructor (searchBoxElement, callback, delay = 300) {
-    this.searchBox = searchBoxElement
-    this.delay = delay
-    this.callback = callback
+  constructor(searchBoxElement, callback, delay = 300) {
+    this.searchBox = searchBoxElement;
+    this.delay = delay;
+    this.callback = callback;
 
     // Bind the event listener
-    this.searchBox.addEventListener('input', this.debounce(this.handleSearchInput.bind(this), this.delay))
+    this.searchBox.addEventListener('input', this.debounce(this.handleSearchInput.bind(this), this.delay));
   }
 
-  debounce (func, timeout = 300) {
-    let timer
+  debounce(func, timeout = 300) {
+    let timer;
     return (...args) => {
-      clearTimeout(timer)
+      clearTimeout(timer);
       timer = setTimeout(() => {
-        func.apply(this, args)
-      }, timeout)
-    }
+        func.apply(this, args);
+      }, timeout);
+    };
   }
 
-  handleSearchInput () {
+  handleSearchInput() {
     if (typeof this.callback === 'function') {
-      this.callback(this.searchBox.value)
+      this.callback(this.searchBox.value);
     } else {
-      throw new Error('No callback function provided')
+      throw new Error('No callback function provided');
     }
   }
 }
