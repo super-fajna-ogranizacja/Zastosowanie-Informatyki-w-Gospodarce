@@ -1,6 +1,7 @@
+import argparse
 import asyncio
 import os
-import pathlib
+from pathlib import Path
 from typing import Callable
 
 import aiohttp
@@ -121,10 +122,10 @@ async def render_app(render: RenderFn, app: dict) -> dict:
     return html_app
 
 
-async def main():
-    output_dir = pathlib.Path("html")
+async def main(args):
+    output_dir = Path(args.directory)
 
-    with open("apps.yml") as fd:
+    with open(args.input) as fd:
         apps = yaml.load(fd, Loader=Loader)
 
     render = MarkdownRenderer()
@@ -153,4 +154,9 @@ async def main():
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-i", "--input", help="yaml file to be rendered")
+    parser.add_argument("-d", "--directory", help="generated HTML directory")
+    args = parser.parse_args()
+
+    asyncio.run(main(args))
