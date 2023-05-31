@@ -44,10 +44,10 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' }}
         run: |
           cd discussion-history
+          git add -- *.yml
           if [ -n "$(git diff)" ]; then
               git config user.name ${{ github.repository_owner }}
               git config user.email ${{ github.repository_owner }}@users.noreply.github.com
-              git add -- *.yml
               git commit -m "Update yamls"
               git push origin HEAD:discussion-history
           else
