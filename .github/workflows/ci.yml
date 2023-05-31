@@ -35,20 +35,20 @@ jobs:
           token: ${{ secrets.API_TOKEN }} 
           path: discussion-history
           ref: discussion-history
-          
-      - name: Copy generated yaml
+
+      - name: Copy generated yamls
         run: |
-          cp apps.yml discussion-history/
+          cp -- *.yml discussion-history/
 
       - name: Push changes
         run: |
           cd discussion-history
-          if [ -n "$(git diff apps.yml)" ]; then
+          if [ -n "$(git diff)" ]; then
               git config user.name ${{ github.repository_owner }}
               git config user.email ${{ github.repository_owner }}@users.noreply.github.com
-              git add apps.yml
-              git commit -m "Update apps.yml"
+              git add -- *.yml
+              git commit -m "Update yamls"
               git push origin HEAD:discussion-history
           else
-              echo "apps.yml did not change"
+              echo "no app has changed"
           fi

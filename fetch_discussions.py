@@ -3,4 +3,5 @@ import discussion
 
 apps = discussion.parse_discussions()
 application.print_apps(apps)
-application.generate_yaml(apps, filename="apps.yml")
+for app in apps:
+    application.generate_yaml([app], filename=f"{app.name}.yml")
