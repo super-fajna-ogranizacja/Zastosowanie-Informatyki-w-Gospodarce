@@ -7,7 +7,7 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"
     />
-    <link rel="stylesheet" href="./styles/styles.css"/>
+    <link rel="stylesheet" href="styles/styles.css"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>just</title>
@@ -15,8 +15,8 @@
 <body>
 <main>
     <header class="navigator">
-        <nav><a href="">Home</a></nav>
-        <div>
+        <nav><a href="/">Home</a></nav>
+        <div style="position: relative">
             <label>
                 <input type="text" placeholder="Search" id="search-box"/>
             </label>
@@ -38,6 +38,13 @@
         a handy way to save and run project-specific commands
     </p>
 
+    <h3>URLs</h3>
+    <div class="container">
+        <ul>
+            <li><a href="https://github.com/casey/just">https://github.com/casey/just</a></li>
+        </ul>
+    </div>
+
     <h3>Types</h3>
     <div class="container">
             <span class="chip">CLI</span>
@@ -53,9 +60,11 @@
     <h2>Comments</h2>
 
     <p>
-        not great command runner searching for justfiles in upper directories
+        great command runner searching for justfiles in upper directories
     </p>
 </main>
+
+<script src="scripts/script.js" type="module"></script>
 
 </body>
 </html>
