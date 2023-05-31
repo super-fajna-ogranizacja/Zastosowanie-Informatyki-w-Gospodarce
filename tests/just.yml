@@ -1,0 +1,13 @@
+---
+just:
+  description: a handy way to save and run project-specific commands
+  urls:
+  - https://github.com/casey/just
+  types:
+  - CLI
+  platforms:
+  - Linux
+  - Windows
+  - MacOS
+  categories: Currently using
+  comments: great command runner searching for justfiles in upper directories

@@ -1,0 +1,27 @@
+---
+name: Run tests for application
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run:
+          pip install -r requirements.txt
+
+      - name: Setup test environment
+        run: |
+          cp yaml2html.py tests/
+          cp project.html.mustache tests/
+
+      - name: Run tests
+        run: |
+          cd tests
+          ./test_html_generation.sh
+        env:
+          OWNER_AND_REPO: ${{ github.repository }}
+          API_TOKEN: ${{ secrets.API_TOKEN }}
