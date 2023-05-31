@@ -8,7 +8,7 @@ const container = document.getElementById('virtual-scroll');
 const searchBox = document.getElementById('search-box');
 
 window.addEventListener('load', () => {
-  const rows = Object.keys(projects).map((name) => ({ id: name, name, url: `/${name}.html` }));
+  const rows = Object.keys(projects).map((name) => ({ id: name, name, url: `./${name}.html` }));
   const virtualScroll = new VirtualScroll(container, rows, {});
 
   const filterProjects = (promptText, passedProjects) => {
