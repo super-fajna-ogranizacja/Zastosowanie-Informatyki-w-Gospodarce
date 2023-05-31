@@ -1,0 +1,13 @@
+czkawka:
+  description: a simple, fast and free app to remove unnecessary files from your computer
+  urls:
+  - https://github.com/qarmin/czkawka
+  types:
+  - CLI
+  - GUI
+  platforms:
+  - Linux
+  - Windows
+  - MacOS
+  categories: Want to or may use
+  comments: Looks useful

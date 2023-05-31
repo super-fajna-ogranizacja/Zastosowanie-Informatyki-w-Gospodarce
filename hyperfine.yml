@@ -1,0 +1,12 @@
+hyperfine:
+  description: a command-line benchmarking tool
+  urls:
+  - https://github.com/sharkdp/hyperfine
+  types:
+  - CLI
+  platforms:
+  - Linux
+  - Windows
+  - MacOS
+  categories: Currently using
+  comments: great for comparing different commands
