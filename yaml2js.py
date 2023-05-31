@@ -26,7 +26,7 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-o", "--output", help="path to generated projects.js")
+    parser.add_argument("-d", "--directory", help="generated HTML directory")
     parser.add_argument("input", nargs="+", help="input yaml files")
     args = parser.parse_args()
 

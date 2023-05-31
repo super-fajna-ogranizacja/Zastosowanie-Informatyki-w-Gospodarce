@@ -125,8 +125,11 @@ async def render_app(render: RenderFn, app: dict) -> dict:
 async def main(args):
     output_dir = Path(args.directory)
 
-    with open(args.input) as fd:
-        apps = yaml.load(fd, Loader=Loader)
+    apps = {}
+
+    for path in args.input:
+        with open(path) as fd:
+            apps |= yaml.load(fd, Loader=Loader)
 
     render = MarkdownRenderer()
 
@@ -155,8 +158,8 @@ async def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-i", "--input", help="yaml file to be rendered")
     parser.add_argument("-d", "--directory", help="generated HTML directory")
+    parser.add_argument("input", nargs="+", help="input yaml files")
     args = parser.parse_args()
 
     asyncio.run(main(args))
