@@ -1,5 +1,6 @@
 import argparse
 import json
+from pathlib import Path
 
 import yaml
 
@@ -10,6 +11,7 @@ except ImportError:
 
 
 def main(args):
+    output_dir = Path(args.directory)
     projects = {}
 
     for path in args.input:
@@ -20,7 +22,7 @@ def main(args):
     js_src += json.dumps(projects, indent=2)
     js_src += ";\n"
 
-    with open(args.output, "w") as fd:
+    with open(output_dir / "projects.js", "w") as fd:
         fd.write(js_src)
 
 
