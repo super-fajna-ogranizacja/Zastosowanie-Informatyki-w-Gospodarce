@@ -31,12 +31,17 @@ jobs:
       - name: Build
         run: |
           cd main
-          cp ../apps.yml .
-          python yaml2html.py
-
           mkdir ../build
-          cp html/* ../build/
-          cp -r styles ../build/styles
+          cp index.html ../build
+
+          mkdir ../build/styles
+          cp styles/*.css ../build/styles
+
+          mkdir ../build/scripts
+          cp scripts/*.js ../build/scripts
+
+          python yaml2html.py -d ../build ../*.yml
+          python yaml2js.py -d ../build/scripts ../*.yml
         env:
           OWNER_AND_REPO: ${{ github.repository }}
           API_TOKEN: ${{ secrets.API_TOKEN }}
