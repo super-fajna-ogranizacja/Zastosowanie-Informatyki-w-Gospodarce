@@ -41,6 +41,7 @@ jobs:
           cp -- *.yml discussion-history/
 
       - name: Push changes
+        if: ${{ github.ref == 'refs/heads/main' }}
         run: |
           cd discussion-history
           if [ -n "$(git diff)" ]; then
