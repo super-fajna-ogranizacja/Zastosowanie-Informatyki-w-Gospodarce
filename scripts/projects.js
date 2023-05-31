@@ -1,4 +1,19 @@
 export const projects = {
+  "Pico Torrent": {
+    "description": "a tiny, hackable BitTorrent client",
+    "urls": [
+      "https://github.com/picotorrent/picotorrent",
+      "https://picotorrent.org/"
+    ],
+    "types": [
+      "GUI"
+    ],
+    "platforms": [
+      "Windows"
+    ],
+    "categories": "Currently using",
+    "comments": "minimal torrent client, sadly only for Windows"
+  },
   "TinyNvidiaUpdateChecker": {
     "description": "check for NVIDIA GPU driver updates",
     "urls": [
