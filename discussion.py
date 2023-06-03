@@ -95,6 +95,7 @@ def parse_discussions():
         "nodes"
     ]:
         app_name = discussion["title"]
+        number = discussion["number"]
         matched = body_regex.match(discussion["body"])
         try:
             description = matched.group(1).rstrip()
@@ -108,7 +109,7 @@ def parse_discussions():
             continue
 
         app = application.App(
-            app_name, description, urls, types, platforms, categories, comments
+            app_name, description, urls, types, platforms, categories, comments, number
         )
         apps.append(app)
         print(f"Parsed discussion for {app_name} successfully")
