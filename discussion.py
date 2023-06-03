@@ -1,11 +1,6 @@
-import json
-import os
 import re
 
 import application
-import connection
-
-DISCUSSIONS_CATEGORY = os.environ["DISCUSSIONS_CATEGORY"]
 
 
 def parse_checkboxes(text):
@@ -33,42 +28,19 @@ def parse_checkboxes(text):
     return checked
 
 
-def get_category_id():
-    """Gets the id of the category with name discussions_category
+def parse_discussions(response):
+    """Parses the discussions provided in the response
 
-    Returns
-    -------
-    str
-        id of the category
-    """
-
-    response = connection.send_request(connection.CATEGORIES_QUERY)
-    categories = json.loads(response.text)["data"]["repository"][
-        "discussionCategories"
-    ]["nodes"]
-
-    for category in categories:
-        if category["name"] == DISCUSSIONS_CATEGORY:
-            return category["id"]
-    return None
-
-
-def parse_discussions():
-    """Gets discussions from server's response and prints them
+    Parameters
+    ----------
+    response : list
+        List of discussions
 
     Returns
     -------
     list
         List of App objects
     """
-
-    categoryId = get_category_id()
-
-    variables = {
-        "categoryId": categoryId,
-    }
-
-    response = connection.send_request(connection.DISCUSSIONS_QUERY, variables)
 
     # Regexes for parsing the entries in discussion body
     # multiline_re is needed to match even if there are new lines
@@ -91,9 +63,7 @@ def parse_discussions():
     )
 
     apps = []
-    for discussion in json.loads(response.text)["data"]["repository"]["discussions"][
-        "nodes"
-    ]:
+    for discussion in response:
         app_name = discussion["title"]
         number = discussion["number"]
         matched = body_regex.match(discussion["body"])
