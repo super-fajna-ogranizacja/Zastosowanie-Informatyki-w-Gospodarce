@@ -6,7 +6,9 @@ except ImportError:
 
 
 class App:
-    def __init__(self, name, description, urls, types, platforms, categories, comments):
+    def __init__(
+        self, name, description, urls, types, platforms, categories, comments, number
+    ):
         self.name = name
         self.description = description
         self.urls = urls.split()
@@ -14,6 +16,7 @@ class App:
         self.platforms = platforms
         self.categories = categories
         self.comments = comments
+        self.number = number
 
     def __str__(self):
         return "\n".join(
@@ -25,6 +28,7 @@ class App:
                 f"Platforms: {self.platforms}",
                 f"Categories: {self.categories}",
                 f"Comments: {self.comments}",
+                f"Number: {self.number}",
             ]
         )
 
@@ -74,6 +78,7 @@ def generate_yaml(apps, filename):
             "platforms": app.platforms,
             "categories": app.categories,
             "comments": app.comments.replace("\r", ""),
+            "number": app.number,
         }
 
     if filename:

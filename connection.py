@@ -17,6 +17,7 @@ query getDiscussions {
             nodes {
                 title
                 body
+                number
                 author {
                     login
                 }
