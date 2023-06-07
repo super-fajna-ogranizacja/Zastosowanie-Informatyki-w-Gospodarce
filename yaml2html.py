@@ -112,6 +112,11 @@ async def render_app(render: RenderFn, app: dict) -> dict:
     html_app = {"original_name": app["name"]}
 
     for field, field_value in app.items():
+        # don't render number value
+        if field == "number":
+            html_app[field] = field_value
+            continue
+
         if isinstance(field_value, list):
             html_app[field] = []
             for item in field_value:
