@@ -40,6 +40,11 @@ jobs:
         run: |
           cp -- *.yml discussion-history/
 
+      - name: Save main HEAD hash
+        run: |
+          git rev-parse HEAD > discussion-history/.github/hash-main
+          git -C discussion-history add .github/hash-main
+
       - name: Push changes
         if: ${{ github.ref == 'refs/heads/main' }}
         run: |
