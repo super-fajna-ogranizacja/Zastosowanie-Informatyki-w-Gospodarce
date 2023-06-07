@@ -12,7 +12,8 @@ export const projects = {
       "Windows"
     ],
     "categories": "Currently using",
-    "comments": "minimal torrent client, sadly only for Windows"
+    "comments": "minimal torrent client, sadly only for Windows",
+    "number": 31
   },
   "TinyNvidiaUpdateChecker": {
     "description": "check for NVIDIA GPU driver updates",
@@ -26,7 +27,8 @@ export const projects = {
       "Windows"
     ],
     "categories": "Using now and then",
-    "comments": "Used once, I think and looked OK. Lists [EnvyUpdate](https://github.com/fyr77/EnvyUpdate) and [nvidia-update](https://github.com/ZenitH-AT/nvidia-update) as alternatives"
+    "comments": "Used once, I think and looked OK. Lists [EnvyUpdate](https://github.com/fyr77/EnvyUpdate) and [nvidia-update](https://github.com/ZenitH-AT/nvidia-update) as alternatives",
+    "number": 22
   },
   "czkawka": {
     "description": "a simple, fast and free app to remove unnecessary files from your computer",
@@ -43,7 +45,8 @@ export const projects = {
       "MacOS"
     ],
     "categories": "Want to or may use",
-    "comments": "Looks useful"
+    "comments": "Looks useful",
+    "number": 19
   },
   "hyperfine": {
     "description": "a command-line benchmarking tool",
@@ -59,7 +62,8 @@ export const projects = {
       "MacOS"
     ],
     "categories": "Currently using",
-    "comments": "great for comparing different commands"
+    "comments": "great for comparing different commands",
+    "number": 16
   },
   "just": {
     "description": "a handy way to save and run project-specific commands",
@@ -75,6 +79,7 @@ export const projects = {
       "MacOS"
     ],
     "categories": "Currently using",
-    "comments": "great command runner searching for justfiles in upper directories"
+    "comments": "great command runner searching for justfiles in upper directories",
+    "number": 17
   }
 };
