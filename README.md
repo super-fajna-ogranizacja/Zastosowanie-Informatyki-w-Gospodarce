@@ -21,12 +21,12 @@
 
 1. To create a page for a tool, create a discussion and fill in the template.
 2. Open the project's index.html file in a web browser.
-3. Comment either on the tool inside of the Github Pages or the tool's discussion page.
+3. Comment either on the tool inside of the GitHub Pages or the tool's discussion page.
 ## Features
 
 - Virtual Scroll: Implements virtual scrolling to efficiently handle large datasets.
 - Search Functionality: Provides a search feature to find specific content within the project.
-- Integrated Github comments from the tool's disscusion inside the Github Pages
+- Integrated GitHub comments from the tool's disscusion inside the GitHub Pages
 
 ## Used Technologies
 
