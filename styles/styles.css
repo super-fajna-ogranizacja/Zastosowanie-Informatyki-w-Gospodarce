@@ -58,7 +58,7 @@
 }
 
 .page{
-    margin-top: 30vh;
+    margin-top: 3vh;
     position:relative;
 }
 
@@ -101,4 +101,22 @@
     height: 100%;
     align-items: center;
     justify-content: center;
+}
+
+.logo{
+    font-weight: bold;
+    font-size: 72px;
+    margin-top: 27vh;
+    text-align: center;
+}
+
+.logo>a{
+    color: var(--nc-tx-1);
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.logo>a:hover{
+    color: var(--nc-bg-1);
+    background: var(--nc-tx-1);
 }
