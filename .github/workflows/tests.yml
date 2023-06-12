@@ -18,7 +18,11 @@ jobs:
           cp yaml2html.py tests/
           cp project.html.mustache tests/
 
-      - name: Run tests
+      - name: Run tests for response parsing
+        run: |
+          python -m unittest test.py --buffer
+
+      - name: Run tests for HTML generation
         run: |
           cd tests
           ./test_html_generation.sh

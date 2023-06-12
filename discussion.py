@@ -69,10 +69,30 @@ def parse_discussions(response):
         matched = body_regex.match(discussion["body"])
         try:
             description = matched.group(1).rstrip()
+        except AttributeError:
+            print(f"Error during body parsing for {app_name}")
+            continue
+        try:
             urls = matched.group(2)
+        except AttributeError:
+            print(f"Error during body parsing for {app_name}")
+            continue
+        try:
             types = parse_checkboxes(matched.group(3))
+        except AttributeError:
+            print(f"Error during body parsing for {app_name}")
+            continue
+        try:
             platforms = parse_checkboxes(matched.group(4))
+        except AttributeError:
+            print(f"Error during body parsing for {app_name}")
+            continue
+        try:
             categories = matched.group(5).rstrip()
+        except AttributeError:
+            print(f"Error during body parsing for {app_name}")
+            continue
+        try:
             comments = matched.group(6).rstrip()
         except AttributeError:
             print(f"Error during body parsing for {app_name}")
