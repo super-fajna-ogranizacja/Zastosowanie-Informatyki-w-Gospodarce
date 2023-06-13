@@ -96,6 +96,10 @@
     width: 100%;
 }
 
+.container-nav{
+    text-align:right;
+}
+
 .message-container{
     display: flex;
     height: 100%;
