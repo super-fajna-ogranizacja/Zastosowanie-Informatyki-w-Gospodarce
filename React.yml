@@ -1,0 +1,11 @@
+React:
+  description: React
+  urls:
+  - https://react.dev/
+  types:
+  - framework
+  platforms:
+  - Web
+  categories: Need to check
+  comments: I love React
+  number: 40
