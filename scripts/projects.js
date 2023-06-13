@@ -30,6 +30,21 @@ export const projects = {
     "comments": "minimal torrent client, sadly only for Windows",
     "number": 31
   },
+  "React": {
+    "description": "React",
+    "urls": [
+      "https://react.dev/"
+    ],
+    "types": [
+      "framework"
+    ],
+    "platforms": [
+      "Web"
+    ],
+    "categories": "Need to check",
+    "comments": "I love React",
+    "number": 40
+  },
   "TinyNvidiaUpdateChecker": {
     "description": "check for NVIDIA GPU driver updates",
     "urls": [
